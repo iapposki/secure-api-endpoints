@@ -6,10 +6,10 @@ export const authenticate = async (req: Request, res: Response, next: NextFuncti
 	var { token } = req.query;
 	var tempToken: any = token;
     if (!token) {
-        const tokenAuthHeader = req.header["token"];
+        const tokenAuthHeader = req.headers["authorization"];
         tempToken = tokenAuthHeader && (tokenAuthHeader as string).split(" ")[1];
     }
-	if (!token) {
+	if (!tempToken) {
 		return res.status(401).json({
 				msg: "Authentication token not provided."
 			});
