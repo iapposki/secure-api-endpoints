@@ -4,7 +4,8 @@ import { Request, Response, Express } from 'express';
 import * as bodyParser from 'body-parser';
 import cors from 'cors'
 import { signUp, login } from './controllers/auth.controller';
-// import { authenticate } from './middlewares/auth';
+import { authenticate } from './middlewares/auth.middleware';
+import { getEntries } from './controllers/apiData.controller';
 
 
 const app: Express = express();
@@ -28,6 +29,8 @@ app.get('/status', async (req: Request, res: Response) => {
 
 app.post('/auth/signup', signUp)
 app.post('/auth/login', login)
+
+app.get('/entries', authenticate, getEntries)
 
 // -----------------------------------------------------
 if (require.main === module) {
