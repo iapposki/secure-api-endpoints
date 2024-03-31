@@ -25,6 +25,7 @@ export const signUp = async (req: Request, res: Response) => {
     const { name, email, password, confirmPassword } = req.body;
     var condition = true;
     if (!(name && email && password && confirmPassword)) {
+        console.log(name, email, password, confirmPassword)
         res.status(400).json({ msg: 'Insufficient information' });
         condition = false;
     }

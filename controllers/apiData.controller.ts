@@ -17,5 +17,5 @@ export const getEntries = async (req: Request, res: Response) => {
             res.status(400).json({msg: "An error occured while fetching data."})
         }
     const data = await response.json();
-    res.status(201).json({msg: data})
+    res.status(200).json({msg: data})
 }
