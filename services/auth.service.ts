@@ -1,19 +1,7 @@
 import prisma from "./prisma.service";
 import { Md5 } from "ts-md5";
-import * as jwt from 'jsonwebtoken';
-import {config} from '../config/index';
 import { User } from "@prisma/client";
-
-export const generateToken = async (
-	name: string,
-	email: string,
-	expiry: string | number = 300,
-) => {
-	const token = jwt.sign({ name, email}, config.authSecret, {
-		expiresIn: expiry,
-	});
-	return token;
-};
+import { generateToken } from "../utils/jwt.utils";
 
 export const createUser = async (userDetails: any) => {
 	await prisma.user.create({data: {...userDetails, password: Md5.hashStr(userDetails.password),},});
