@@ -1,6 +1,5 @@
-import { createUser, getUserByEmail, generateToken, validateUsernamePassword } from "../services/auth.service";
+import { createUser, validateUsernamePassword } from "../services/auth.service";
 import {Request, Response} from 'express';
-import { User } from "@prisma/client";
 
 declare global { namespace Express { interface Request { userDetails?: any } } }
 
