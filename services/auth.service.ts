@@ -17,7 +17,7 @@ export const generateToken = async (
 
 export const createUser = async (userDetails: any) => {
 	await prisma.user.create({data: {...userDetails, password: Md5.hashStr(userDetails.password),},});
-	const token = await generateToken(userDetails.name, userDetails.email, "USER");
+	const token = await generateToken(userDetails.name, userDetails.email);
 	return token;
 };
 
