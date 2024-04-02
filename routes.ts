@@ -2,6 +2,7 @@ import { Express } from 'express';
 import { signUp, login } from './controllers/auth.controller';
 import { authenticate } from './middlewares/auth.middleware';
 import { getEntries } from './controllers/apiData.controller';
+import { getEthBalance } from './controllers/ethereum.controller';
 
 export const routes = (app:Express) => {
     /**
@@ -126,4 +127,24 @@ export const routes = (app:Express) => {
      *              description: Some error occured while retrieving entry data
      */
     app.get('/entries', authenticate, getEntries)
+
+    /**
+     * @openapi
+     *  /eth/balance:
+     *  get:
+     *      description: This endpoint allows users to retrieve balance of ethereum accounts on mainnet. 
+     *      summary: Retrieves ethereum account balance.
+     *      parameters: 
+     *          - name: address
+     *            in: query
+     *            type: string
+     *            required: true
+     *            description:  ethereum account address
+     *      responses:
+     *          200: 
+     *              description: Successfully retrieved account balance
+     *          400: 
+     *              description: Some error occured while fetching balance. Either wrong address or web3 provider error.
+     */
+    app.get('/eth/balance',authenticate, getEthBalance)
 }
